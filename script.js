@@ -14,31 +14,34 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Form submission handler (Formspree)
 const contactForm = document.querySelector('.contact-form');
+
 if (contactForm) {
-  contactForm.addEventListener('submit', function(e) {
+  contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const formData = new FormData(this);
+    const formData = new FormData(contactForm);
+    const email = contactForm.querySelector('input[name="email"]').value;
 
     fetch("https://formspree.io/f/xldarwbe", {
       method: "POST",
       body: formData,
       headers: { "Accept": "application/json" }
     })
-    .then(response => {
-      if (response.ok) {
-        alert("Thank you for your interest! We'll contact you at ${email} soon.");
-        this.reset();
-      } else {
-        alert("An error has occurred. Please try again.");
-      }
-    })
-    .catch(error => {
-      alert("Connection error. Please try again later.");
-      console.error(error);
-    });
+      .then(response => {
+        if (response.ok) {
+          alert(`Thank you for your interest! We'll contact you at ${email} soon.`);
+          contactForm.reset();
+        } else {
+          alert("An error has occurred. Please try again.");
+        }
+      })
+      .catch(error => {
+        alert("Connection error. Please try again later.");
+        console.error(error);
+      });
   });
 }
+
 
 // Add animation on scroll
 const observerOptions = {
