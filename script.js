@@ -27,14 +27,14 @@ if (contactForm) {
     })
     .then(response => {
       if (response.ok) {
-        alert("Merci ! Votre message a bien été envoyé.");
+        alert("Thank you for your interest! We'll contact you at ${email} soon.");
         this.reset();
       } else {
-        alert("Une erreur est survenue. Merci de réessayer.");
+        alert("An error has occurred. Please try again.");
       }
     })
     .catch(error => {
-      alert("Erreur de connexion. Merci de réessayer plus tard.");
+      alert("Connection error. Please try again later.");
       console.error(error);
     });
   });
